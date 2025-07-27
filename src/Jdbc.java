@@ -17,12 +17,20 @@ public class Jdbc {
         Connection con = DriverManager.getConnection(url,username,password);
         Statement stmt = con.createStatement();
 
-        String sql = "select * from student";
-        ResultSet rs = stmt.executeQuery(sql);
+        String q1 = "create table staffs(sid int, sname varchar(30))";
+        stmt.executeUpdate(q1);
 
-        while(rs.next()){
-            System.out.println(rs.getInt("rno")+" "+rs.getString("name")+" "+rs.getString("location"));
-        }
+        String q2 = "insert into student values(5, 'antony', 'Bangalore')";
+        int val1=stmt.executeUpdate(q2);
+        System.out.println("Number of rows affected : "+ val1);
+
+        String q3 = "update student set location='Erode' where rno=2";
+        int val2=stmt.executeUpdate(q3);
+        System.out.println("Number of rows affected : "+ val2);
+
+        String sql = "delete from student where rno=2";
+        int val3=stmt.executeUpdate(sql);
+        System.out.println("Number of rows affected : "+ val3);
 
         con.close();
     }
